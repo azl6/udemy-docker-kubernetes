@@ -7,11 +7,13 @@ WORKDIR /app
 #Copying files into the conteiner.
 #1st param: Files to be copied.
 #2nd param: Path to paste the files. Could be changed to '.' or './' of WORKDIR is setted.
-COPY . /app
+COPY package.json /app
 
 #npm install to install all nodejs dependencies.
 #If WORKDIR is not setted, this will be run on the root folder.
 RUN npm install
+
+COPY . /app
 
 #Exposes a certain port from the container to the local machine. 100% optional, since it doesn't really expose the port.
 #Instead, you can use the flag –p "[LOCAL_PORT]:[DOCKER_EXPOSED_PORT]" to expose docker ports.
