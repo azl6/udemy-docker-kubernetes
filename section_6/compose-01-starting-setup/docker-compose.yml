@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+
+  mongodb:
+    image: 'mongo'  #Usa uma imagem pronta
+    volumes: 
+      - data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: max 
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    container_name: mongodb #Define o nome do contêiner
+
+  backend:
+    build: ./backend  #Builda uma imagem com do caminho de um Dockerfile (a partir do compose)
+    environment:      #Variáveis de ambiente
+      MONGODB_USERNAME: max 
+      MONGODB_PASSWORD: secret
+    volumes:              #Volumes
+      - logs:/app/logs    #Named volume
+      - ./backend:/app    #Bind-Mount. O diretório '< :' pode ser especificado a partir do compose
+      - /app/node_modules #Anonymous volume
+    ports:
+      - '80:80'
+    depends_on:
+      - mongodb #Esse serviço depende do mongodb para inicializar
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    stdin_open: true  #flag -it
+    tty: true         #flag -it
+
+
+volumes:
+  data: #Named volumes devem obrigatóriamente ser especificados aqui. N vale pra bind mount ou A.V
+  logs:
