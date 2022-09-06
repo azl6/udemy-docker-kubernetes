@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  npm:
+    build: ./         #buildando e utilizando o Dockerfile do diretório
+    volumes:
+      - ./:/app       #Bind mount para gerar os arquivos localmente após docker-compose run
+    tty: true         #flag -it
+    stdin_open: true  #flag -it
