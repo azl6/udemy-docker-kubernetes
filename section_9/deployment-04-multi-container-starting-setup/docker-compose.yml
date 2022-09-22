@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  
+  backend:
+    build: './backend'
+    ports:
+      - '80:80'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'userPersonalizadoAlex'
+      MONGO_INITDB_ROOT_PASSWORD: 'senhaPersonalizadaAlex'
+      HOST_MONGO_DATABASE: 'mongodb'
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: 'mongo'
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'userPersonalizadoAlex'
+      MONGO_INITDB_ROOT_PASSWORD: 'senhaPersonalizadaAlex'
+    volumes:
+      - './persistedData:/data/db'
+
+

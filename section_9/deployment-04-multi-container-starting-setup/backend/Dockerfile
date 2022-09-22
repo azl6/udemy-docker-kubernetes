@@ -1,0 +1,17 @@
+FROM node:8
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 80
+
+ENV MONGO_INITDB_ROOT_USERNAME=USERNAMEERRADO
+ENV MONGO_INITDB_ROOT_PASSWORD=SENHAERRADA
+ENV HOST_MONGO_DATABASE=mongodb1 
+
+CMD [ "npm", "start" ]
