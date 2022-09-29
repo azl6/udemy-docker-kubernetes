@@ -5,6 +5,7 @@ const app = express();
 app.get('/', (req, res) => {
   res.send(`
     <h1>Hello from this NodeJS app!</h1>
+    <p>This is new! Only available on kub-first-app:2</p>
     <p>Try sending a request to /error and see what happens</p>
   `);
 });
