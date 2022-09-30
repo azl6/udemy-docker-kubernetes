@@ -18,5 +18,11 @@ spec: ######################### ESPECIFICAÇÕES DO DEPLOYMENT
       containers: ########################### Declaração dos contêineres que irão para as Pods (neste caso, 3)
         - name: second-node ################# Nome do contêiner
           image: azold6/kub-first-app:2 ## Imagem a ser usada
+          livenessProbe:
+            httpGet:
+              path: / # Caminho onde a requisição "verificadora de saúde" deve ser enviada
+              port: 8080 # Porta para a requisição
+            periodSeconds: 10 # Intervalo de verificação após o início
+            initialDelaySeconds: 5 #Intervalo de verificação inicial
         # - name: ... (Caso eu queira adicionar mais contêineres)
         #   image: ...
