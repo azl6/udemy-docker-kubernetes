@@ -10,3 +10,10 @@ spec:
       port: 80 ############# Porta externa
       targetPort: 8080 ##### Porta interna a ser exposta
   type: LoadBalancer ####### Tipo do serviço. Poderia ser ClusterIP, NodePort, etc...
+
+
+  # SERVICE DEFINITIONS
+  # ...
+  ---
+  # DEPLOYMENT DEFINITIONS
+  # ...
