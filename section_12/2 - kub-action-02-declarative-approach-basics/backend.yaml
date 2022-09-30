@@ -1,0 +1,12 @@
+apiVersion: v1 
+kind: Service ############## Tipo do objeto
+metadata:
+  name: backend ############ Nome do objeto
+spec:
+  selector:
+    app: second-app ######## Selector para definir qual pod terá suas portas expostas por esse serviço. 
+  ports:            ######## O second-app foi definido no arquivo deployment.yaml
+    - protocol: 'TCP'
+      port: 80 ############# Porta externa
+      targetPort: 8080 ##### Porta interna a ser exposta
+  type: LoadBalancer ####### Tipo do serviço. Poderia ser ClusterIP, NodePort, etc...

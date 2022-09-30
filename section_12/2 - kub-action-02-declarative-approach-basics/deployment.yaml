@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment ############## Tipo do objeto (neste caso, Deployment. Poderia ser um Service, Job, etc...)
 metadata:
   name: second-app-deployment # Nome do objeto.
-spec: ######################### Specifications of the overall deployment
+spec: ######################### ESPECIFICAÇÕES DO DEPLOYMENT
   replicas: 1 ################# Qtd. de pods do deployment.
   selector:
     matchLabels:
       app: second-app ######### Variável que auxilia o deployment a encontrar as pods que deve gerenciar.
       tier: backend ########### Neste caso, O deployment buscará pelo valor 'nginx' em spec.template.metadata.labels.app.  
-  
-  template:         ########### Se existir, funcionará adequadamente
+                    
+  template: ################################# ESPECIFICAÇÕES DO POD. Em caso de confusão, consultar aula 198.     
     metadata: 
       labels:
-        app: second-app ####### Local onde o selector.matchLabels busca pelas labels das aplicações.
+        app: second-app ##################### Local onde o selector.matchLabels busca pelas labels das aplicações.
         tier: backend
     spec: 
-      containers: ############################# Declaração dos contêineres que irão para as Pods (neste caso, 3)
-        - name: second-node ################### Nome do contêiner
-          image: azold6/kub-first-app:latest ##Imagem a ser usada
+      containers: ########################### Declaração dos contêineres que irão para as Pods (neste caso, 3)
+        - name: second-node ################# Nome do contêiner
+          image: azold6/kub-first-app:2 ## Imagem a ser usada
         # - name: ... (Caso eu queira adicionar mais contêineres)
         #   image: ...
