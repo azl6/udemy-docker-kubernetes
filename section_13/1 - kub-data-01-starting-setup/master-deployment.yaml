@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dep-story-exposure
+spec:
+  selector:
+      app: app-story
+  ports:
+    - protocol: 'TCP'
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-story
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: app-story
+  template:
+    metadata:
+      labels:
+        app: app-story
+    spec:
+      containers:
+        - name: story-backend
+          image: azold6/kub-deploy-stor
+          volumeMounts:
+            - mountPath: /app/story # Caminho que não pode ser perdido no reiniciamento do contêiner
+              name: story-volume # Linkagem do diretório desejado ao volume criado abaixo
+      volumes:
+        - name: story-volume # Nome do volume
+          emptyDir: {} # Tipo do volume
+
