@@ -30,8 +30,8 @@ spec:
           image: azold6/kub-deploy-stor
           volumeMounts:
             - mountPath: /app/story # Caminho que não pode ser perdido no reiniciamento do contêiner
-              name: story-volume # Linkagem do diretório desejado ao volume criado abaixo
+              name: story-volume #### Linkagem do diretório desejado ao volume criado abaixo
       volumes:
-        - name: story-volume # Nome do volume
-          emptyDir: {} # Tipo do volume
-
+        - name: story-volume ######## Nome do volume
+          persistentVolumeClaim: 
+            claimName: host-pvc ##### Referenciando a Claim para acessar o volume.

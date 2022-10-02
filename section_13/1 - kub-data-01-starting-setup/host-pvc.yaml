@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: host-pvc
+spec:
+  volumeName: host-pv # Nome do PersistentVolume a ser reinvindicado pela Claim
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce # Mesmo access mode do PersistentVolume
+  resources: #Parte necessária. Ainda não sei o porquê.
+    requests:
+      storage: 1Gi
+
