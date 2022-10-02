@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+data:
+  folder: 'story' # Variável key:value que será utilizada no yaml do resource Deployment
+# Aqui, podem ser adicionadas mais veriáveis de ambiente do tipo key:value
+# key2: 'value2'... 
+# key3: 'value3'...

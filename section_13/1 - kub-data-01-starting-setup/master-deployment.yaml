@@ -24,14 +24,22 @@ spec:
     metadata:
       labels:
         app: app-story
+    #...
     spec:
       containers:
         - name: story-backend
-          image: azold6/kub-deploy-stor
+          image: azold6/kub-deploy-story
+          env:
+            name: STORY_FOLDER # Nome da variável de ambiente
+            valueFrom: # Definindo o source do valor da variável
+              configMapKeyRef: # Definindo que o valor virá de um objeto ConfigMap
+                name: myconfigmap # Nome do objeto
+                key: story # Chave de onde o objeto virá, definido no [CONFIGMAP_NAME].yaml
+    #...
           volumeMounts:
             - mountPath: /app/story # Caminho que não pode ser perdido no reiniciamento do contêiner
-              name: story-volume #### Linkagem do diretório desejado ao volume criado abaixo
+              name: story-volume # Linkagem do diretório desejado ao volume criado abaixo
       volumes:
-        - name: story-volume ######## Nome do volume
+        - name: story-volume # Nome do volume
           persistentVolumeClaim: 
             claimName: host-pvc ##### Referenciando a Claim para acessar o volume.
