@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-users
+  template:
+    metadata:
+      labels:
+        app: app-users
+    spec:
+      containers:
+        - name:  cont-users
+          image:  azold6/kub-demo-users:latest
+          env:
+            - name: AUTH_ADRESS
+              value: localhost
