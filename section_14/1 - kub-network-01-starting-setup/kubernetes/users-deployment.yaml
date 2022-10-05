@@ -11,10 +11,12 @@ spec:
     metadata:
       labels:
         app: app-users
+    # ...
     spec:
       containers:
         - name:  cont-users
           image:  azold6/kub-demo-users:latest
           env:
             - name: AUTH_ADRESS
-              value: localhost
+              value: "serv-auth.default" # [NOME_SERVICO_EXPOSICAO].[NAMESPACE_DO_SERVICO]
+                                          
